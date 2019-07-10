@@ -1,0 +1,12 @@
+.dropdown-menu > li > a {
+  clear: none;
+}
+
+.inline {
+  display: inline !important;
+  padding: 5px;
+}
+
+.text-red {
+  color: #f30606;
+}

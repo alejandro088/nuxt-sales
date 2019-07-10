@@ -1,16 +1,29 @@
 import colors from 'vuetify/es5/util/colors'
+const webpack = require('webpack')
 
 export default {
+  build: {
+    vendor: ['jquery', 'bootstrap'],
+    plugins: [
+      // set shortcuts as global for bootstrap
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      })
+    ]
+  },
   mode: 'universal',
   /*
   ** Headers of the page
   */
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: process.env.npm_package_name || 'Web Sales | Dashboard',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' },
+      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
@@ -19,8 +32,14 @@ export default {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
-      }
+          'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic'
+      },
+      
+    ],
+    script: [
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js', type: 'text/javascript' },
+      { src: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', type: 'text/javascript' },
+      { src: 'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.12/js/adminlte.min.js', type: 'text/javascript' }
     ]
   },
   /*
@@ -31,11 +50,19 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/bootstrap.min.css' ,
+    '@/assets/css/font-awesome.min.css' ,
+    '@/assets/css/ionicons.min.css' ,
+    '@/assets/css/AdminLTE.min.css' ,
+    '@/assets/css/skins/_all-skins.min.css' ,
+    '@/assets/css/vue-select.css' ,
+    '@/assets/css/main.css',
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/bootstrap.js',
   ],
   /*
   ** Nuxt.js modules
